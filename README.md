@@ -1,13 +1,18 @@
 # SharkTeam-onvzeto
 
-A `CARLA_0.9.15` https://tiny.carla.org/carla-0-9-15-linux-on linken érhető el.
-Ezt másolja a Dockerfile bele a konténerbe a Carla telepítéséhez.
 
-# Kész image használata
+# Kész image használata (egyszerűbb)
 Feltöltöttem a githubra egy általam már buildelt konténer imaget.
+
+```
+docker pull ghcr.io/pavlisinectamas/onvezeto-image:latest
+```
 
 # Image építése a dockerfile-al
 ## Feltétlek:
+- A `CARLA_0.9.15` https://tiny.carla.org/carla-0-9-15-linux-on linken érhető el.
+  Ezt másolja a Dockerfile bele a konténerbe a Carla telepítéséhez.
+  Letöltés után kb. 25 GB helyet foglal
 - Linuxos rendszer
 - Docker telepítve
 - Videókártya integráló csomagok a dockerhez ha kell
@@ -22,14 +27,18 @@ Ebben a mappában:
 docker build -t konténer-neve .
 ```
 Ez kb. 15 perc alatt megvan.
+> A bulidelést a docker cache készítésével segíti ez hamar hatalmasra nőhet.
+> törléshez `docker builder prune`
 
-Futtatás:
+# Futtatás:
 ```
 docker run -it --rm --runtime=nvidia --gpus all --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" konténer-neve
 ```
+konténer-neve az általam feltöltött image esetén:
+`ghcr.io/pavlisinectamas/onvezeto-image:latest`
 
-`--rm` flag leállítás után automatikusan törli a konténert
-`--runtime=nvidia` csak nvidia gpuval kell
+- `--rm` flag leállítás után automatikusan törli a konténert
+- `--runtime=nvidia` csak nvidia gpuval kell
 
 ## X server
 A konténernek hozzá kell férni a host X serveréhez, hogy ablakokat jeleníthessen meg a hoston.
@@ -66,3 +75,6 @@ De ha valamikor valamiért hang kéne belőle a Dockerfile módosításával ez 
 
 # Fejlesztési lehetőségek
 Lehet, hogy egy multi stage docker build csökkentheti a build időt.
+
+A Carla közvetlen konténerbe másolása nem vagyok benne biztos, hogy a leg elegánsabb módszer de működik.
+Ezt lehet, hogy lehetne jobban csinálni de nekem nem nagyon van ötletem jelenleg.
