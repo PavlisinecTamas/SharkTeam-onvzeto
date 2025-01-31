@@ -7,7 +7,7 @@ docker pull ghcr.io/pavlisinectamas/onvezeto-image:latest
 
 # Image építése a dockerfile-al
 ## Feltétlek:
-- A `CARLA_0.9.15` https://tiny.carla.org/carla-0-9-15-linux-on linken érhető el.
+- A `CARLA_0.9.15` https://tiny.carla.org/carla-0-9-15-linux linken érhető el.
   Ezt másolja a Dockerfile bele a konténerbe a Carla telepítéséhez.
   Letöltés után kb. 25 GB helyet foglal
 - Linuxos rendszer
