@@ -1,6 +1,3 @@
-# SharkTeam-onvzeto
-
-
 # Kész image használata (egyszerűbb)
 Feltöltöttem a githubra egy általam már buildelt konténer imaget.
 
