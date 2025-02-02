@@ -55,6 +55,9 @@ http://www.straightrunning.com/XmingNotes/
 
 Ezeket még nem teszteltem de elméletileg ezekkel windowson is el kéne indulnia.
 
+youtube tutorial:
+https://www.youtube.com/watch?v=F-GFS6yRysU
+
 # Carla tippek
 https://rocketloop.de/en/blog/carla-setup-remote-access/
 
