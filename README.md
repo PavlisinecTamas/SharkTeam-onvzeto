@@ -5,6 +5,17 @@ Feltöltöttem a githubra egy általam már buildelt konténer imaget.
 docker pull ghcr.io/pavlisinectamas/onvezeto-image:latest
 ```
 
+# Futtatás:
+```
+docker run -it --rm --runtime=nvidia --gpus all --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" konténer-neve
+```
+konténer-neve az általam feltöltött image esetén:
+`ghcr.io/pavlisinectamas/onvezeto-image:latest`
+
+- `--rm` flag leállítás után automatikusan törli a konténert
+- `--runtime=nvidia` csak nvidia gpuval kell
+
+
 # Image építése a dockerfile-al
 ## Feltétlek:
 - A `CARLA_0.9.15` https://tiny.carla.org/carla-0-9-15-linux linken érhető el.
@@ -25,17 +36,8 @@ docker build -t konténer-neve .
 ```
 Ez kb. 15 perc alatt megvan.
 > A bulidelést a docker cache készítésével segíti ez hamar hatalmasra nőhet.
+
 > törléshez `docker builder prune`
-
-# Futtatás:
-```
-docker run -it --rm --runtime=nvidia --gpus all --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" konténer-neve
-```
-konténer-neve az általam feltöltött image esetén:
-`ghcr.io/pavlisinectamas/onvezeto-image:latest`
-
-- `--rm` flag leállítás után automatikusan törli a konténert
-- `--runtime=nvidia` csak nvidia gpuval kell
 
 ## X server
 A konténernek hozzá kell férni a host X serveréhez, hogy ablakokat jeleníthessen meg a hoston.
