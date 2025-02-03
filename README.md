@@ -13,7 +13,7 @@ konténer-neve az általam feltöltött image esetén:
 `ghcr.io/pavlisinectamas/onvezeto-image:latest`
 
 - `--rm` flag leállítás után automatikusan törli a konténert
-- `--runtime=nvidia` csak nvidia gpuval kell
+- `--runtime=nvidia --gpus all` csak nvidia gpuval kell
 
 
 # Image építése a dockerfile-al
@@ -26,7 +26,7 @@ konténer-neve az általam feltöltött image esetén:
 - Videókártya integráló csomagok a dockerhez ha kell
     - Nvidia: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
     - Intel: ??
-    - AMD: ??
+    - AMD: https://rocm.docs.amd.com/en/docs-5.0.2/deploy/linux/quick_start.html
 - A `Dockerfile` és a `CARLA_0.9.15` egy mappában
 
 Ebben a mappában:
@@ -41,8 +41,9 @@ Ez kb. 15 perc alatt megvan.
 
 ## X server
 A konténernek hozzá kell férni a host X serveréhez, hogy ablakokat jeleníthessen meg a hoston.
-Legegyszerűbb az X server autentikációját kikapcsolni az `xhost +` paranccsal. Használat után erősen javasolt azt visszakapcsolni az `xhost -`
-paranccsal.
+Legegyszerűbb az X server autentikációját kikapcsolni az `xhost +` paranccsal. 
+
+Használat után erősen javasolt azt visszakapcsolni az `xhost -` paranccsal.
 
 Szebb megoldások:
 https://stackoverflow.com/questions/40499412/how-to-view-gui-apps-from-inside-a-docker-container
