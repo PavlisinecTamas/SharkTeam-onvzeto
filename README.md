@@ -7,7 +7,7 @@ docker pull ghcr.io/pavlisinectamas/onvezeto-image:latest
 
 # Futtatás:
 ```
-docker run -it --rm --runtime=nvidia --gpus all --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" konténer-neve
+docker run -it --rm --runtime=nvidia --gpus all --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" konténer-neve
 ```
 konténer-neve az általam feltöltött image esetén:
 `ghcr.io/pavlisinectamas/onvezeto-image:latest`
