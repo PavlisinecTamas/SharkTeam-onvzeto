@@ -24,6 +24,9 @@ RUN groupadd --gid $USER_GID $USERNAME \
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y python3-pip
 
+#Intel/AMD driver support
+RUN apt install -y mesa-vulkan-drivers 
+
 #Carla dependecies
 RUN apt-get install -y \
     pciutils \
@@ -39,10 +42,10 @@ RUN apt-get install -y \
     xdg-utils 
 
 # Python3.7 install
-RUN sudo apt install -y software-properties-common
-RUN sudo add-apt-repository -y ppa:deadsnakes/ppa 
-RUN sudo apt update 
-RUN sudo apt install -y python3.7 python3.7-distutils
+RUN apt install -y software-properties-common
+RUN add-apt-repository -y ppa:deadsnakes/ppa 
+RUN apt update 
+RUN apt install -y python3.7 python3.7-distutils
 
 COPY CARLA_0.9.15 /home/CARLA_0.9.15
 RUN chown $USERNAME:$USERNAME /home/CARLA_0.9.15

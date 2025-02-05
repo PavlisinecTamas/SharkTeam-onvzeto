@@ -6,27 +6,24 @@ docker pull ghcr.io/pavlisinectamas/onvezeto-image:latest
 ```
 
 # Futtatás:
+Az általam feltöltött image esetén:
 ```
-docker run -it --rm --runtime=nvidia --gpus all --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" konténer-neve
-```
-konténer-neve az általam feltöltött image esetén:
-`ghcr.io/pavlisinectamas/onvezeto-image:latest`
+docker run -it --rm --runtime=nvidia --gpus all --device=/dev/dri:/dev/dri --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/dev/dri:/dev/dri:rw" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" ghcr.io/pavlisinectamas/onvezeto-image:latest
 
+```
 - `--rm` flag leállítás után automatikusan törli a konténert
-- `--runtime=nvidia --gpus all` csak nvidia gpuval kell
-
+- `--runtime=nvidia` csak nvidia gpuval kell
 
 # Image építése a dockerfile-al
 ## Feltétlek:
 - A `CARLA_0.9.15` https://tiny.carla.org/carla-0-9-15-linux linken érhető el.
   Ezt másolja a Dockerfile bele a konténerbe a Carla telepítéséhez.
   Letöltés után kb. 25 GB helyet foglal
-- Linuxos rendszer
 - Docker telepítve
 - Videókártya integráló csomagok a dockerhez ha kell
     - Nvidia: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
-    - Intel: ??
-    - AMD: https://rocm.docs.amd.com/en/docs-5.0.2/deploy/linux/quick_start.html
+    - Intel: Integált GPUnak nem kell 
+    - AMD: ?? (https://rocm.docs.amd.com/en/docs-5.0.2/deploy/linux/quick_start.html)
 - A `Dockerfile` és a `CARLA_0.9.15` egy mappában
 
 Ebben a mappában:
@@ -35,15 +32,19 @@ Ebben a mappában:
 docker build -t konténer-neve .
 ```
 Ez kb. 15 perc alatt megvan.
-> A bulidelést a docker cache készítésével segíti ez hamar hatalmasra nőhet.
 
-> törléshez `docker builder prune`
+Utánna futtatás ugyanúgy mint a letöltött image-el csak a konténer-neve taget használva.
+> A bulidelést a docker cache készítésével segíti ez hamar hatalmasra nőhet.
+>
+> Törléshez: `docker builder prune`
 
 ## X server
 A konténernek hozzá kell férni a host X serveréhez, hogy ablakokat jeleníthessen meg a hoston.
-Legegyszerűbb az X server autentikációját kikapcsolni az `xhost +` paranccsal. 
+Legegyszerűbb az X server autentikációját kikapcsolni az `xhost +` paranccsal (a host parancssorában). 
 
-Használat után erősen javasolt azt visszakapcsolni az `xhost -` paranccsal.
+Használat után erősen javasolt azt visszakapcsolni az `xhost -` paranccsal (a host parancssorában).
+
+Mindez csak akkor szükséges ha valami miatt nem akarna egyből valami grafikus alkalmazás ablaka megjelenni.
 
 Szebb megoldások:
 https://stackoverflow.com/questions/40499412/how-to-view-gui-apps-from-inside-a-docker-container
@@ -52,11 +53,6 @@ http://wiki.ros.org/docker/Tutorials/GUI
 ## Windows
 Windowson a docker desktop telepítéséhez:
 https://www.docker.com/products/docker-desktop/
-
-X server:
-http://www.straightrunning.com/XmingNotes/
-
-Ezeket még nem teszteltem de elméletileg ezekkel windowson is el kéne indulnia.
 
 youtube tutorial:
 https://www.youtube.com/watch?v=F-GFS6yRysU
@@ -79,5 +75,5 @@ De ha valamikor valamiért hang kéne belőle a Dockerfile módosításával ez 
 # Fejlesztési lehetőségek
 Lehet, hogy egy multi stage docker build csökkentheti a build időt.
 
-A Carla közvetlen konténerbe másolása nem vagyok benne biztos, hogy a leg elegánsabb módszer de működik.
+A Carla közvetlen konténerbe másolása nem vagyok benne biztos, hogy a legelegánsabb módszer de működik.
 Ezt lehet, hogy lehetne jobban csinálni de nekem nem nagyon van ötletem jelenleg.
