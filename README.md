@@ -6,6 +6,14 @@ docker pull ghcr.io/pavlisinectamas/onvezeto-image:latest
 ```
 
 # Futtatás:
+**Start script:**
+```
+./start.sh ghcr.io/pavlisinectamas/onvezeto-image 
+```
+- `-n` nvidia gpuval
+- további argumentumok a dockernek lesznek átadva
+  - pl.: `./start.sh konténer-neve -n --docker_opcio1`
+
 Az általam feltöltött image esetén:
 ```
 docker run -it --rm --runtime=nvidia --gpus all --device=/dev/dri:/dev/dri --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/dev/dri:/dev/dri:rw" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" ghcr.io/pavlisinectamas/onvezeto-image:latest

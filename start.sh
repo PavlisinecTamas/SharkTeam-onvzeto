@@ -36,20 +36,16 @@ nvidia()
     $1
 }
 
-if [ "$#" -eq 1 ] ; then
-    case $1 in
-        -h|--help) Help;;
-        -*) Help;;
-        *) intel $@; exit 0;;
-    esac
+if [ "$#" -eq 0 ]; then
+    Help
 fi
 
-if [ "$#" -gt 1 ]; then
-    case $2 in
-        -h|--help) Help;;
-        -n) nvidia $@; exit 0;;
-        *) Help;;
-    esac
-fi 
+case $1 in
+    -h|--help|-*) Help;;
+esac
 
-Help
+case $2 in
+    -h|--help) Help;;
+    -n) nvidia $@; exit 0;;
+    *) intel $@; exit 0;;
+esac
