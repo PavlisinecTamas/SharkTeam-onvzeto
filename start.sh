@@ -2,7 +2,7 @@
 
 Help() 
 {
-    echo "Ez a Carla-t és ROS2-t tartalmazó konténer indítását segítő script."
+    echo "Ez egy docker konténerek indítását segítő script."
     echo "Használat:"
     echo "$0 KONTÉNER_NEVE [-n] [-DOCKER ARGS]"
     echo 
