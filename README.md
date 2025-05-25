@@ -75,13 +75,3 @@ A minőség állítására a `quality-level=<Low/Epic>` használható.
 ## PythonAPI
 A Carlahoz járó PythonAPI a pippel elérhető carla modullal használható. Ez csak bizonyos python verziókkal működik.
 A konténer a Python3.7 verziót tartalmazza egy Symlinkkel a `/usr/bin/python` -ra. Így elvileg működnek a `PythonAPI/examples` példái (a konténerben nem teszteltem mindegyiket).
-
-## Fun fact:
-Induláskor a Carla server konténerben ALSA könyvtár hiányából adódó hibákat ad de nem tudom miért hiányolja mivel lokálisan futtatva nem játszik le hangot.
-De ha valamikor valamiért hang kéne belőle a Dockerfile módosításával ez orvosolható.
-
-# Fejlesztési lehetőségek
-Lehet, hogy egy multi stage docker build csökkentheti a build időt.
-
-A Carla közvetlen konténerbe másolása nem vagyok benne biztos, hogy a legelegánsabb módszer de működik.
-Ezt lehet, hogy lehetne jobban csinálni de nekem nem nagyon van ötletem jelenleg.
